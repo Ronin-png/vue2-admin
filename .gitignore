@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+eslint-disable
+.vue
 
 
 # local env files
