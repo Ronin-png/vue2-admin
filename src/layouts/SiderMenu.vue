@@ -1,11 +1,10 @@
 <template>
   <div style="width: 200px">
     <a-menu
-      :default-selected-keys="['1']"
-      :default-open-keys="['2']"
+      :selectedKeys="selectedKeys"
+      :openKeys.sync="openKeys"
       mode="inline"
       theme="dark"
-      :inline-collapsed="collapsed"
     >
       <template v-for="item in newDataList">
         <a-menu-item v-if="!item.children" :key="item.key">
@@ -26,26 +25,12 @@ export default {
     'sub-menu': SubMenu,
   },
   data() {
+    const newDataList = this.getMenuList(this.$router.options.routes)
     return {
-      newDataList: this.getMenuList(this.$router.options.routes),
       collapsed: false,
-      list: [
-        {
-          key: '1',
-          title: 'Option 1',
-        },
-        {
-          key: '2',
-          title: 'Navigation 2',
-          children: [
-            {
-              key: '2.1',
-              title: 'Navigation 3',
-              children: [{ key: '2.1.1', title: 'Option 2.1.1' }],
-            },
-          ],
-        },
-      ],
+      newDataList,
+      selectedKeys: [],
+      openKeys: [],
     };
   },
 
@@ -54,17 +39,26 @@ export default {
     console.log('5555', this.getMnueList)
   },
 
-  methods: {
-    // 递归处理路由数据
-    getMenuList(routes) {
+  watch: {
+    openKeys: (val, oldVal) => {
+      console.log('打开的数组', val)
+    },
+    selectedKeys: (val, oldVal) => {
       debugger
+      console.log('选中的项', val)
+    }
+  },
+
+  methods: {
+    // 处理路由数据
+    getMenuList(routes) {
       const newRoutes = []
       for (const items of routes) {
         if (items.name && !items.isHideMenu) {
           const newItems = {...items}
-          delete items.children
+          delete newItems.children
           if (items.children && !items.hideChildrenMenu) {
-            newItems.children = getMenuList(items.children)
+            newItems.children = this.getMenuList(items.children)
           }
           newRoutes.push(newItems)
         } else if (
@@ -75,7 +69,6 @@ export default {
           newRoutes.push(...this.getMenuList(items.children))
         }
       }
-      console.log('newRoutes', newRoutes)
       return newRoutes
     },
 
