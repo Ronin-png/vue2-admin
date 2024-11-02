@@ -28,7 +28,9 @@
         </a-layout-footer>
       </a-layout>
     </a-layout>
-    <DrawerPage/>
+    <authorization :authority="['admin']">
+      <DrawerPage/>
+    </authorization>
   </div>
 </template>
 

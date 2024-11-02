@@ -13,6 +13,7 @@ import {
   Drawer,
   Radio,
 } from 'ant-design-vue';
+import authorization from './components/authorization.vue'
 
 Vue.config.productionTip = false
 
@@ -24,6 +25,7 @@ Vue.use(Breadcrumb);
 Vue.use(Icon);
 Vue.use(Drawer);
 Vue.use(Radio);
+Vue.component('authorization', authorization)
 
 console.log('app', App)
 
