@@ -9,7 +9,7 @@
       <template v-for="item in newDataList">
         <a-menu-item v-if="!item.children" :key="item.key">
           <a-icon type="pie-chart" />
-          <span>{{ item.mate.title }}</span>
+          <span>{{ item.meta.title }}</span>
         </a-menu-item>
         <sub-menu v-else :key="item.key" :menu-info="item" />
       </template>
