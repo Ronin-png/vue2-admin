@@ -14,6 +14,7 @@ import {
   Radio,
 } from 'ant-design-vue';
 import authorization from './components/authorization.vue'
+import install from './directives/auth'
 
 Vue.config.productionTip = false
 
@@ -26,6 +27,7 @@ Vue.use(Icon);
 Vue.use(Drawer);
 Vue.use(Radio);
 Vue.component('authorization', authorization)
+Vue.use(install);
 
 console.log('app', App)
 
