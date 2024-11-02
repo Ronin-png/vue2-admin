@@ -14,6 +14,7 @@
         <a-layout-header style="background: #fff; padding: 0">
           <HeaderPage/>
           <a-icon
+            v-author="['admin']"
             v-if="navLayout === 'left'" 
             class="trigger"
             :type="collapsed ? 'menu-unfold' : 'menu-fold'"

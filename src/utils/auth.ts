@@ -1,6 +1,6 @@
 // 当前登录用户
 export function getCurrentAuthority() {
-  return ['admin']
+  return ['user']
 }
 
 // 判断当前登录用户是否有权限

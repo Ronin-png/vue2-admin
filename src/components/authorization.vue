@@ -9,7 +9,6 @@ export default {
     }
   } ,
   render: function(h, context) {
-    debugger
     const { props, scopedSlots } = context;
     return check(props.authority) ? scopedSlots.default() : null;
   }
