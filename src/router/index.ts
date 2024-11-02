@@ -124,23 +124,21 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   debugger
   if (to.path !== from.path) {
+    NProgress.start();
     console.log('to.matched', to.matched)
     const lastAuth: any = findLast(to.matched, (record: Record<string, any>) => record.meta.requireAuth)
     if (lastAuth && !check(lastAuth.meta.requireAuth)) {
-      if (!isLogin()) {
-        debugger
-        next({ name: 'login' })
-        return
+      if (!isLogin() && to.path !== '/User/login') {
+        next({ path: '/User/login' })
+      } else if (to.path !== '/403') {
+        notification.error({
+          message: '无权限',
+          description: '无权限访问此页面',
+        });
+        next({ path: '/403' })
       }
-      NProgress.start();
-      notification.error({
-        message: '无权限',
-        description: '无权限访问此页面',
-      });
-      next({ name: '403' })
-      return
+      NProgress.done()
     }
-    NProgress.start();
     next()
   } else {
     next(false);
