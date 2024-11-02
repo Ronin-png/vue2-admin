@@ -27,7 +27,7 @@ Vue.use(Icon);
 Vue.use(Drawer);
 Vue.use(Radio);
 Vue.component('authorization', authorization)
-Vue.use(install);
+Vue.use(install, {name: 'author'});
 
 console.log('app', App)
 
